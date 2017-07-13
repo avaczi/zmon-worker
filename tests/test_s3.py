@@ -136,7 +136,6 @@ def test_listing_on_existing_prefix(monkeypatch):
     assert file_list.files()[0]['last_modified'] == datetime(2015, 1, 15, 14, 34, 56)
 
 
-
 def test_listing_on_prefix_that_has_no_objects(monkeypatch):
     """
     Can be either because the prefix does not exist or there are no objects under it
