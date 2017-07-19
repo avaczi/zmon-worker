@@ -171,4 +171,4 @@ class S3FileList(object):
                              [item['Key'], item['LastModified'], item['Size']]))
                     for item in self.__response['Contents']]
         else:
-            return {}
+            return []
