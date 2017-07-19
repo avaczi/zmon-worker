@@ -82,13 +82,8 @@ class S3Wrapper(object):
         :param max_keys: the maximum number of objects to list
         :return: an S3FileList object
         """
-        try:
-            response = self.__client.list_objects_v2(Bucket=bucket_name, Prefix=prefix, MaxKeys=max_keys)
-            return S3FileList(response)
-        except ClientError:
-            if response["ResponseMetadata"]["HTTPStatusCode"] == 403:
-                raise IOError("Access denied")
-            return S3FileList({})
+        response = self.__client.list_objects_v2(Bucket=bucket_name, Prefix=prefix, MaxKeys=max_keys)
+        return S3FileList(response)
 
 
 class S3Object(object):
