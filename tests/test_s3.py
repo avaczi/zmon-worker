@@ -176,4 +176,4 @@ def test_listing_bubbles_client_error_up(monkeypatch):
         file_list = s3_wrapper.list_bucket('bucket', 'prefix').files()
 
     # raise IOError(str(ex))
-    assert 'Access denied' in str(ex)
+    assert 'Access denied' == ex.value.response['Error']['Message']
