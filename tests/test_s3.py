@@ -164,7 +164,7 @@ def test_listing_bubbles_client_error_up(monkeypatch):
     client = MagicMock()
 
     def writer_side_effect(*args, **kwargs):
-        raise ClientError({'Error': {'Code': 403, 'Message':'Access denied'}}, 'information')
+        raise ClientError({'Error': {'Code': 403, 'Message': 'Access denied'}}, 'information')
     client.list_objects_v2.side_effect = writer_side_effect
     get = MagicMock()
     get.return_value.json.return_value = {'region': 'eu-central-1'}
@@ -173,7 +173,7 @@ def test_listing_bubbles_client_error_up(monkeypatch):
     s3_wrapper = S3Wrapper()
 
     with pytest.raises(ClientError) as ex:
-        file_list = s3_wrapper.list_bucket('bucket', 'prefix').files()
+        s3_wrapper.list_bucket('bucket', 'prefix').files()
 
     # raise IOError(str(ex))
     assert 'Access denied' == ex.value.response['Error']['Message']
